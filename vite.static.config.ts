@@ -10,7 +10,7 @@ export default defineConfig({
     outDir: "dist-static",
     emptyOutDir: true,
     rollupOptions: {
-      input: "static-index.html",
+      input: "index.html",
     },
   },
 });
