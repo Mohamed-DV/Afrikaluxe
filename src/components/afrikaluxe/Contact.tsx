@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "motion/react";
-import { MessageCircle, Mail, Instagram, Twitter, Facebook, Send, CheckCircle2, Loader2, AlertCircle } from "lucide-react";
+import { MessageCircle, Mail, Instagram, Facebook, Send, CheckCircle2, Loader2, AlertCircle } from "lucide-react";
 import { useState } from "react";
 import { z } from "zod";
 
@@ -37,17 +37,16 @@ export function Contact() {
     setErrors({});
     setStatus("loading");
     try {
-      const res = await fetch("https://formsubmit.co/ajax/marketing@afrikaluxe.com", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          ...parsed.data,
-          _subject: `[AfrikaLuxe] ${parsed.data.subject}`,
-          _template: "table",
-          _captcha: "false",
-        }),
-      });
-      if (!res.ok) throw new Error("Échec de l'envoi");
+      const subject = `[AfrikaLuxe] ${parsed.data.subject}`;
+      const body = [
+        `Nom: ${parsed.data.name}`,
+        `Email: ${parsed.data.email}`,
+        "",
+        "Message:",
+        parsed.data.message,
+      ].join("\n");
+      const mailtoUrl = `mailto:marketing@afrikaluxe.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailtoUrl;
       setStatus("success");
       form.reset();
       setTimeout(() => setStatus("idle"), 5000);
@@ -195,18 +194,32 @@ export function Contact() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="space-y-4"
           >
-            <ContactCard icon={MessageCircle} title="WhatsApp" value="+243 999 000 000" accent="bg-flag-green" />
+            <ContactCard icon={MessageCircle} title="WhatsApp" value="+243 850 761 771" accent="bg-flag-green" />
             <ContactCard icon={Mail} title="Email" value="marketing@afrikaluxe.com" accent="bg-flag-blue" />
             <div className="glass-dark rounded-3xl p-6">
               <div className="text-xs uppercase tracking-wider text-muted-foreground">Suivez-nous</div>
               <div className="mt-4 flex gap-3">
-                {[Instagram, Twitter, Facebook].map((Icon, i) => (
+                {[
+                  {
+                    icon: Instagram,
+                    href: "https://www.instagram.com/afrikaluxeofficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+                    label: "Instagram",
+                  },
+                  {
+                    icon: Facebook,
+                    href: "https://www.facebook.com/share/18DGPt7neo/?mibextid=wwXIfr",
+                    label: "Facebook",
+                  },
+                ].map((social) => (
                   <a
-                    key={i}
-                    href="#"
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
                     className="grid h-11 w-11 place-items-center rounded-full glass-gold transition-transform hover:scale-110"
                   >
-                    <Icon className="h-5 w-5 text-primary" />
+                    <social.icon className="h-5 w-5 text-primary" />
                   </a>
                 ))}
               </div>
@@ -260,7 +273,15 @@ function ContactCard({
 }) {
   return (
     <a
-      href={title === "Email" ? `mailto:${value}` : "#"}
+      href={
+        title === "Email"
+          ? `mailto:${value}`
+          : title === "WhatsApp"
+            ? "https://wa.me/243850761771"
+            : "#"
+      }
+      target={title === "WhatsApp" ? "_blank" : undefined}
+      rel={title === "WhatsApp" ? "noopener noreferrer" : undefined}
       className="glass-dark group flex items-center gap-4 rounded-3xl p-5 transition-all hover:border-primary/40 hover:shadow-gold"
     >
       <div className={`grid h-12 w-12 place-items-center rounded-2xl ${accent} shadow-glow`}>

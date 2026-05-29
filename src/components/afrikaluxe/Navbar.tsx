@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import brandA from "@/assets/brand-a.svg";
 
 const links = [
   { label: "Accueil", href: "#hero" },
@@ -18,8 +19,8 @@ export function Navbar() {
     >
       <nav className="glass-dark mx-auto flex max-w-7xl items-center justify-between rounded-full px-6 py-3 shadow-elevated">
         <a href="#hero" className="flex items-center gap-2">
-          <span className="grid h-9 w-9 place-items-center rounded-full bg-gradient-gold text-primary-foreground font-display text-lg shadow-gold">
-            A
+          <span className="grid h-9 w-9 place-items-center rounded-full bg-[oklch(0.11_0.01_60)] shadow-gold ring-1 ring-primary/35">
+            <img src={brandA} alt="AfrikaLuxe logo" className="h-6 w-6 object-contain" />
           </span>
           <span className="font-display text-lg tracking-tight">
             Afrika<span className="text-gold-gradient">Luxe</span>

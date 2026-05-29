@@ -1,11 +1,25 @@
-import { motion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import { ArrowRight, Apple, Play } from "lucide-react";
 import heroProducts from "@/assets/hero-products.jpg";
 import africaMap from "@/assets/africa-map.png";
 
-const countries = ["🇨🇩", "🇨🇬", "🇨🇲", "🇦🇴", "🇬🇳", "🇹🇩", "🇲🇱", "🇲🇬", "🇬🇦"];
+const countries = [
+  { code: "cd", name: "RDC" },
+  { code: "cg", name: "Congo" },
+  { code: "cm", name: "Cameroun" },
+  { code: "ao", name: "Angola" },
+  { code: "gn", name: "Guinee" },
+  { code: "td", name: "Tchad" },
+  { code: "ml", name: "Mali" },
+  { code: "mg", name: "Madagascar" },
+  { code: "ga", name: "Gabon" },
+];
 
 export function Hero() {
+  const { scrollYProgress } = useScroll();
+  const mapY = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const heroVisualY = useTransform(scrollYProgress, [0, 1], [0, -70]);
+
   return (
     <section
       id="hero"
@@ -15,9 +29,10 @@ export function Hero() {
       }}
     >
       {/* Africa map background */}
-      <div
+      <motion.div
         className="pointer-events-none absolute inset-0 opacity-[0.18]"
         style={{
+          y: mapY,
           backgroundImage: `url(${africaMap})`,
           backgroundSize: "contain",
           backgroundPosition: "right center",
@@ -102,7 +117,7 @@ export function Hero() {
               </div>
             </a>
             <a
-              href="https://afrikaluxebackoffice.ecomub.com/"
+              href="https://play.google.com/store/apps/details?id=com.afrikaluxe.app&hl=en"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 rounded-xl glass-dark px-4 py-2.5 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_oklch(0.78_0.16_82_/_0.4)]"
@@ -125,13 +140,20 @@ export function Hero() {
               Disponible dans 9 pays
             </div>
             <div className="flex flex-wrap gap-2">
-              {countries.map((c, i) => (
+              {countries.map((country) => (
                 <motion.span
-                  key={i}
+                  key={country.code}
                   whileHover={{ y: -3, scale: 1.1 }}
-                  className="grid h-10 w-10 place-items-center rounded-full glass-dark text-xl"
+                  className="grid h-10 w-10 place-items-center overflow-hidden rounded-full glass-dark"
+                  title={country.name}
+                  aria-label={country.name}
                 >
-                  {c}
+                  <img
+                    src={`https://flagcdn.com/w40/${country.code}.png`}
+                    alt={`Drapeau ${country.name}`}
+                    loading="lazy"
+                    className="h-full w-full object-cover"
+                  />
                 </motion.span>
               ))}
             </div>
@@ -144,6 +166,7 @@ export function Hero() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           className="relative"
+          style={{ y: heroVisualY }}
         >
           <div className="relative overflow-hidden rounded-3xl shadow-elevated">
             <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-transparent mix-blend-overlay" />
