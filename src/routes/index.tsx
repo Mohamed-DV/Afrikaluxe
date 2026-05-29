@@ -1,29 +1,41 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Navbar } from "@/components/afrikaluxe/Navbar";
+import { Hero } from "@/components/afrikaluxe/Hero";
+import { Features } from "@/components/afrikaluxe/Features";
+import { WhySection } from "@/components/afrikaluxe/WhySection";
+import { AppSection } from "@/components/afrikaluxe/AppSection";
+import { Contact } from "@/components/afrikaluxe/Contact";
+import { Footer } from "@/components/afrikaluxe/Footer";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "AfrikaLuxe — Marketplace N°1 en Afrique" },
+      {
+        name: "description",
+        content:
+          "AfrikaLuxe est la marketplace premium d'Afrique. Le luxe à prix abordable, livré à domicile en 60 minutes.",
+      },
+      { property: "og:title", content: "AfrikaLuxe — Marketplace N°1 en Afrique" },
+      {
+        property: "og:description",
+        content: "Le luxe accessible, livré chez vous en 60 minutes dans 9 pays d'Afrique.",
+      },
     ],
   }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <main className="relative overflow-x-hidden">
+      <Navbar />
+      <Hero />
+      <Features />
+      <WhySection />
+      <AppSection />
+      <Contact />
+      <Footer />
+    </main>
   );
 }
