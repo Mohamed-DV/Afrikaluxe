@@ -90,8 +90,10 @@ export function Hero() {
             className="mt-8 flex flex-wrap items-center gap-3"
           >
             <a
-              href="#app"
-              className="flex items-center gap-2 rounded-xl glass-dark px-4 py-2.5 transition-transform hover:scale-105"
+              href="https://apps.apple.com/ci/app/afrikaluxe/id6759881499"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 rounded-xl glass-dark px-4 py-2.5 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_oklch(0.78_0.16_82_/_0.4)]"
             >
               <Apple className="h-5 w-5" />
               <div className="text-left leading-tight">
@@ -100,8 +102,10 @@ export function Hero() {
               </div>
             </a>
             <a
-              href="#app"
-              className="flex items-center gap-2 rounded-xl glass-dark px-4 py-2.5 transition-transform hover:scale-105"
+              href="https://afrikaluxebackoffice.ecomub.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 rounded-xl glass-dark px-4 py-2.5 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_oklch(0.78_0.16_82_/_0.4)]"
             >
               <Play className="h-5 w-5 fill-current" />
               <div className="text-left leading-tight">
