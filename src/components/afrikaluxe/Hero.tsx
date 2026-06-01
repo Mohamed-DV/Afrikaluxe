@@ -16,6 +16,18 @@ const countries = [
   { code: "gn", name: "Guinee Conakry" },
 ];
 
+const partners = [
+
+  "RtopR",
+  "CFERO",
+  "hismile",
+  "ONNIT",
+  "NUTRAFRIK",
+  "South Moon",
+  "BIYODE",
+  "Nature's Bounty",
+];
+
 export function Hero() {
   const { scrollYProgress } = useScroll();
   const mapY = useTransform(scrollYProgress, [0, 1], [0, -120]);
@@ -24,7 +36,7 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative grain min-h-[88vh] overflow-hidden pt-32 pb-10"
+      className="relative grain overflow-hidden pt-28 pb-4"
       style={{
         backgroundImage: `var(--gradient-hero)`,
       }}
@@ -157,6 +169,31 @@ export function Hero() {
                   />
                 </motion.span>
               ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.85 }}
+            className="mt-6"
+          >
+            <div className="mb-3 text-xs uppercase tracking-[0.2em] text-muted-foreground">
+              Partenaires
+            </div>
+            <div className="overflow-hidden rounded-2xl border border-primary/20 bg-[oklch(0.11_0.01_60_/_0.65)] py-3">
+              <div className="partner-track flex items-center gap-3 px-4">
+                {[...partners, ...partners].map((partner, idx) => (
+                  <div
+                    key={`${partner}-${idx}`}
+                    className="flex min-w-[140px] items-center justify-center rounded-xl border border-white/5 bg-black/35 px-4 py-2.5"
+                    title={partner}
+                    aria-label={partner}
+                  >
+                    <span className="text-lg font-semibold text-white/75">{partner}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </motion.div>
         </div>

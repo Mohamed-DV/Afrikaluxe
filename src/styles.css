@@ -221,4 +221,24 @@
     50% { box-shadow: 0 0 70px oklch(0.82 0.14 82 / 0.55); }
   }
   .pulse-glow { animation: pulse-glow 4s ease-in-out infinite; }
+
+  @keyframes partner-marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .partner-track {
+    width: max-content;
+    animation: partner-marquee 28s linear infinite;
+  }
+
+  .partner-track:hover {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .partner-track {
+      animation: none;
+    }
+  }
 }
