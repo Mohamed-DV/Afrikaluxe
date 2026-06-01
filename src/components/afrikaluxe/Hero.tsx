@@ -7,12 +7,13 @@ const countries = [
   { code: "cd", name: "RDC" },
   { code: "cg", name: "Congo" },
   { code: "cm", name: "Cameroun" },
-  { code: "ao", name: "Angola" },
   { code: "gn", name: "Guinee" },
   { code: "td", name: "Tchad" },
   { code: "ml", name: "Mali" },
-  { code: "mg", name: "Madagascar" },
+  { code: "tg", name: "Togo" },
+  { code: "bj", name: "Benin" },
   { code: "ga", name: "Gabon" },
+  { code: "ci", name: "Cote d'Ivoire" },
 ];
 
 export function Hero() {
@@ -23,7 +24,7 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative grain min-h-screen overflow-hidden pt-32 pb-20"
+      className="relative grain min-h-[88vh] overflow-hidden pt-32 pb-10"
       style={{
         backgroundImage: `var(--gradient-hero)`,
       }}
@@ -137,7 +138,7 @@ export function Hero() {
             className="mt-10"
           >
             <div className="mb-3 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-              Disponible dans 9 pays
+              Disponible dans 10 pays
             </div>
             <div className="flex flex-wrap gap-2">
               {countries.map((country) => (

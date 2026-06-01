@@ -24,7 +24,7 @@ function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
 const stats = [
   { value: 250000, suffix: "+", label: "Livraisons effectuées" },
   { value: 120000, suffix: "+", label: "Clients satisfaits" },
-  { value: 9, suffix: "", label: "Pays disponibles" },
+  { value: 10, suffix: "", label: "Pays disponibles" },
   { value: 98, suffix: "%", label: "Taux de satisfaction" },
 ];
 

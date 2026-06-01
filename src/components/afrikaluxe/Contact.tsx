@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "motion/react";
-import { MessageCircle, Mail, Instagram, Facebook, Send, CheckCircle2, Loader2, AlertCircle } from "lucide-react";
+import { MessageCircle, Mail, MapPin, Instagram, Facebook, Send, CheckCircle2, Loader2, AlertCircle } from "lucide-react";
 import { useState } from "react";
 import { z } from "zod";
 
@@ -11,6 +11,14 @@ const schema = z.object({
 });
 
 type Status = "idle" | "loading" | "success" | "error";
+
+const DEFAULT_CONTACT_EMAIL = "contact@afrikaluxe.com";
+
+function getWordPressLeadEndpoint() {
+  if (typeof window === "undefined") return null;
+  const endpoint = new URLSearchParams(window.location.search).get("wp_api");
+  return endpoint ? endpoint.trim() : null;
+}
 
 export function Contact() {
   const [status, setStatus] = useState<Status>("idle");
@@ -37,16 +45,28 @@ export function Contact() {
     setErrors({});
     setStatus("loading");
     try {
-      const subject = `[AfrikaLuxe] ${parsed.data.subject}`;
-      const body = [
-        `Nom: ${parsed.data.name}`,
-        `Email: ${parsed.data.email}`,
-        "",
-        "Message:",
-        parsed.data.message,
-      ].join("\n");
-      const mailtoUrl = `mailto:marketing@afrikaluxe.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      window.location.href = mailtoUrl;
+      const wpEndpoint = getWordPressLeadEndpoint();
+      if (wpEndpoint) {
+        const wpRes = await fetch(wpEndpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(parsed.data),
+        });
+        if (!wpRes.ok) {
+          throw new Error("Impossible d'enregistrer le lead sur WordPress");
+        }
+      } else {
+        const subject = `[AfrikaLuxe] ${parsed.data.subject}`;
+        const body = [
+          `Nom: ${parsed.data.name}`,
+          `Email: ${parsed.data.email}`,
+          "",
+          "Message:",
+          parsed.data.message,
+        ].join("\n");
+        const mailtoUrl = `mailto:${DEFAULT_CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = mailtoUrl;
+      }
       setStatus("success");
       form.reset();
       setTimeout(() => setStatus("idle"), 5000);
@@ -195,7 +215,13 @@ export function Contact() {
             className="space-y-4"
           >
             <ContactCard icon={MessageCircle} title="WhatsApp" value="+243 850 761 771" accent="bg-flag-green" />
-            <ContactCard icon={Mail} title="Email" value="marketing@afrikaluxe.com" accent="bg-flag-blue" />
+            <InfoCard
+              icon={MapPin}
+              title="Adresses"
+              value={["UPN, Kinshasa, RDC", "Limete, Kinshasa, RDC"]}
+              accent="bg-flag-yellow"
+            />
+            <ContactCard icon={Mail} title="Email" value={DEFAULT_CONTACT_EMAIL} accent="bg-flag-blue" />
             <div className="glass-dark rounded-3xl p-6">
               <div className="text-xs uppercase tracking-wider text-muted-foreground">Suivez-nous</div>
               <div className="mt-4 flex gap-3">
@@ -292,5 +318,33 @@ function ContactCard({
         <div className="font-display text-lg">{value}</div>
       </div>
     </a>
+  );
+}
+
+function InfoCard({
+  icon: Icon,
+  title,
+  value,
+  accent,
+}: {
+  icon: typeof MessageCircle;
+  title: string;
+  value: string[];
+  accent: string;
+}) {
+  return (
+    <div className="glass-dark flex items-start gap-4 rounded-3xl p-5">
+      <div className={`grid h-12 w-12 place-items-center rounded-2xl ${accent} shadow-glow`}>
+        <Icon className="h-6 w-6 text-background" />
+      </div>
+      <div>
+        <div className="text-xs uppercase tracking-wider text-muted-foreground">{title}</div>
+        <div className="mt-1 space-y-1 text-sm text-foreground/90">
+          {value.map((line) => (
+            <div key={line}>{line}</div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }

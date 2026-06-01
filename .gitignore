@@ -11,6 +11,9 @@ node_modules
 dist
 dist-static
 dist-static.zip
+dist-onepage
+dist-onepage.zip
+wordpress-template/afrikaluxe-leads.zip
 dist-ssr
 .output
 .vinxi

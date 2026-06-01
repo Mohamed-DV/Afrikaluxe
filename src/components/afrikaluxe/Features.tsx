@@ -25,7 +25,7 @@ const features = [
   {
     icon: CreditCard,
     title: "Paiement sécurisé",
-    desc: "Mobile Money, carte bancaire, cryptomonnaie, paiement à la livraison.",
+    desc: "Cash, Mobile Money, Carte bancaire.",
   },
   {
     icon: Smartphone,
@@ -36,7 +36,7 @@ const features = [
 
 export function Features() {
   return (
-    <section id="features" className="relative py-32">
+    <section id="features" className="relative py-24">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-flag opacity-30" />
       <div className="mx-auto max-w-7xl px-6">
         <motion.div

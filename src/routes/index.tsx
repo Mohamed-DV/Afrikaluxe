@@ -19,7 +19,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "AfrikaLuxe — Marketplace N°1 en Afrique" },
       {
         property: "og:description",
-        content: "Le luxe accessible, livré chez vous en 60 minutes dans 9 pays d'Afrique.",
+        content: "Le luxe accessible, livré chez vous en 60 minutes dans 10 pays d'Afrique.",
       },
     ],
   }),
