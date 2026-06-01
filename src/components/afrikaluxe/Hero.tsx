@@ -6,14 +6,14 @@ import africaMap from "@/assets/africa-map.png";
 const countries = [
   { code: "cd", name: "RDC" },
   { code: "cg", name: "Congo" },
-  { code: "cm", name: "Cameroun" },
-  { code: "gn", name: "Guinee" },
-  { code: "td", name: "Tchad" },
+  { code: "cm", name: "Cameroon" },
   { code: "ml", name: "Mali" },
-  { code: "tg", name: "Togo" },
+  { code: "td", name: "Tchad" },
   { code: "bj", name: "Benin" },
+  { code: "tg", name: "Togo" },
+  { code: "bf", name: "Burkina Faso" },
   { code: "ga", name: "Gabon" },
-  { code: "ci", name: "Cote d'Ivoire" },
+  { code: "gn", name: "Guinee Conakry" },
 ];
 
 export function Hero() {
