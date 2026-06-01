@@ -55,10 +55,11 @@ add_action("rest_api_init", function () {
     "callback" => function (WP_REST_Request $request) {
       $name = sanitize_text_field((string) $request->get_param("name"));
       $email = sanitize_email((string) $request->get_param("email"));
+      $phone = sanitize_text_field((string) $request->get_param("phone"));
       $subject = sanitize_text_field((string) $request->get_param("subject"));
       $message = sanitize_textarea_field((string) $request->get_param("message"));
 
-      if ($name === "" || !is_email($email) || $subject === "" || $message === "") {
+      if ($name === "" || !is_email($email) || $phone === "" || $subject === "" || $message === "") {
         return new WP_REST_Response(array("ok" => false, "error" => "Invalid payload"), 400);
       }
 
@@ -74,11 +75,12 @@ add_action("rest_api_init", function () {
 
       update_post_meta($postId, "name", $name);
       update_post_meta($postId, "email", $email);
+      update_post_meta($postId, "phone", $phone);
       update_post_meta($postId, "subject", $subject);
       update_post_meta($postId, "message", $message);
 
       $mailSubject = "[AfrikaLuxe] " . $subject;
-      $mailBody = "Nom: {$name}\nEmail: {$email}\n\nMessage:\n{$message}";
+      $mailBody = "Nom: {$name}\nEmail: {$email}\nTelephone: {$phone}\n\nMessage:\n{$message}";
       wp_mail(AFRIKALUXE_LEAD_EMAIL, $mailSubject, $mailBody);
 
       return new WP_REST_Response(array("ok" => true, "lead_id" => $postId), 201);
