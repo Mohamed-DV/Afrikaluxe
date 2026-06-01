@@ -17,17 +17,13 @@ const AFRIKALUXE_LEAD_EMAIL = "contact@afrikaluxe.com";
  * This avoids storing secrets in plugin files.
  */
 add_action("phpmailer_init", function ($phpmailer) {
-  if (!defined("AFRIKALUXE_SMTP_HOST")) {
-    return;
-  }
-
   $phpmailer->isSMTP();
-  $phpmailer->Host = AFRIKALUXE_SMTP_HOST;
-  $phpmailer->Port = defined("AFRIKALUXE_SMTP_PORT") ? (int) AFRIKALUXE_SMTP_PORT : 587;
+  $phpmailer->Host = defined("AFRIKALUXE_SMTP_HOST") ? AFRIKALUXE_SMTP_HOST : "mail.afrikaluxe.com";
+  $phpmailer->Port = defined("AFRIKALUXE_SMTP_PORT") ? (int) AFRIKALUXE_SMTP_PORT : 465;
   $phpmailer->SMTPAuth = true;
   $phpmailer->Username = defined("AFRIKALUXE_SMTP_USER") ? AFRIKALUXE_SMTP_USER : AFRIKALUXE_LEAD_EMAIL;
   $phpmailer->Password = defined("AFRIKALUXE_SMTP_PASS") ? AFRIKALUXE_SMTP_PASS : "";
-  $phpmailer->SMTPSecure = defined("AFRIKALUXE_SMTP_ENCRYPTION") ? AFRIKALUXE_SMTP_ENCRYPTION : "tls";
+  $phpmailer->SMTPSecure = defined("AFRIKALUXE_SMTP_ENCRYPTION") ? AFRIKALUXE_SMTP_ENCRYPTION : "ssl";
   $phpmailer->From = AFRIKALUXE_LEAD_EMAIL;
   $phpmailer->FromName = "AfrikaLuxe";
 });

@@ -1,9 +1,5 @@
 <?php
-/**
- * Template Name: AfrikaLuxe Landing
- * Template Post Type: page
- * Description: Full-screen embed template for the AfrikaLuxe landing site.
- */
+
  $wpApi = trailingslashit(site_url()) . "wp-json/afrikaluxe/v1/lead";
  $iframeSrc = add_query_arg(
    array(

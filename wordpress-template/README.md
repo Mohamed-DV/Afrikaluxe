@@ -30,8 +30,8 @@ Add these constants in `wp-config.php` (before `/* That's all, stop editing! */`
 
 ```php
 define('AFRIKALUXE_SMTP_HOST', 'mail.afrikaluxe.com');
-define('AFRIKALUXE_SMTP_PORT', 587);
-define('AFRIKALUXE_SMTP_ENCRYPTION', 'tls');
+define('AFRIKALUXE_SMTP_PORT', 465);
+define('AFRIKALUXE_SMTP_ENCRYPTION', 'ssl');
 define('AFRIKALUXE_SMTP_USER', 'contact@afrikaluxe.com');
 define('AFRIKALUXE_SMTP_PASS', 'YOUR_SMTP_PASSWORD');
 ```

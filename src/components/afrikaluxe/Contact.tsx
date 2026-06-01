@@ -12,12 +12,14 @@ const schema = z.object({
 
 type Status = "idle" | "loading" | "success" | "error";
 
-const DEFAULT_CONTACT_EMAIL = "contact@afrikaluxe.com";
+const CONTACT_EMAIL = "contact@afrikaluxe.com";
+const WORDPRESS_LEAD_ENDPOINT = "https://afrikaluxe.com/wp-json/afrikaluxe/v1/lead";
 
 function getWordPressLeadEndpoint() {
-  if (typeof window === "undefined") return null;
+  if (typeof window === "undefined") return WORDPRESS_LEAD_ENDPOINT;
   const endpoint = new URLSearchParams(window.location.search).get("wp_api");
-  return endpoint ? endpoint.trim() : null;
+  if (endpoint?.trim()) return endpoint.trim();
+  return WORDPRESS_LEAD_ENDPOINT;
 }
 
 export function Contact() {
@@ -46,26 +48,14 @@ export function Contact() {
     setStatus("loading");
     try {
       const wpEndpoint = getWordPressLeadEndpoint();
-      if (wpEndpoint) {
-        const wpRes = await fetch(wpEndpoint, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(parsed.data),
-        });
-        if (!wpRes.ok) {
-          throw new Error("Impossible d'enregistrer le lead sur WordPress");
-        }
-      } else {
-        const subject = `[AfrikaLuxe] ${parsed.data.subject}`;
-        const body = [
-          `Nom: ${parsed.data.name}`,
-          `Email: ${parsed.data.email}`,
-          "",
-          "Message:",
-          parsed.data.message,
-        ].join("\n");
-        const mailtoUrl = `mailto:${DEFAULT_CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        window.location.href = mailtoUrl;
+
+      const wpRes = await fetch(wpEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(parsed.data),
+      });
+      if (!wpRes.ok) {
+        throw new Error("Impossible d'enregistrer le lead sur WordPress");
       }
       setStatus("success");
       form.reset();
@@ -221,7 +211,7 @@ export function Contact() {
               value={["UPN, Kinshasa, RDC", "Limete, Kinshasa, RDC"]}
               accent="bg-flag-yellow"
             />
-            <ContactCard icon={Mail} title="Email" value={DEFAULT_CONTACT_EMAIL} accent="bg-flag-blue" />
+            <ContactCard icon={Mail} title="Email" value={CONTACT_EMAIL} accent="bg-flag-blue" />
             <div className="glass-dark rounded-3xl p-6">
               <div className="text-xs uppercase tracking-wider text-muted-foreground">Suivez-nous</div>
               <div className="mt-4 flex gap-3">
