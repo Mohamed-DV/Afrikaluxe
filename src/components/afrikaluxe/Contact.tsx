@@ -7,7 +7,6 @@ const schema = z.object({
   name: z.string().trim().min(2, "Nom trop court").max(100),
   email: z.string().trim().email("Email invalide").max(255),
   phone: z.string().trim().min(6, "Telephone requis").max(30),
-  subject: z.string().trim().min(2, "Sujet requis").max(150),
   message: z.string().trim().min(5, "Message trop court").max(2000),
 });
 
@@ -36,7 +35,6 @@ export function Contact() {
       name: String(fd.get("name") ?? ""),
       email: String(fd.get("email") ?? ""),
       phone: String(fd.get("phone") ?? ""),
-      subject: String(fd.get("subject") ?? ""),
       message: String(fd.get("message") ?? ""),
     };
     const parsed = schema.safeParse(data);
@@ -104,9 +102,6 @@ export function Contact() {
               <Field name="name" label="Nom complet" placeholder="Aminata Diallo" error={errors.name} />
               <Field name="email" label="Email" type="email" placeholder="aminata@email.com" error={errors.email} />
               <Field name="phone" label="Telephone" type="tel" placeholder="+243 850 761 771" error={errors.phone} />
-            </div>
-            <div className="mt-5">
-              <Field name="subject" label="Sujet" placeholder="Demande de partenariat" error={errors.subject} />
             </div>
             <div className="mt-5">
               <label className="text-xs uppercase tracking-wider text-muted-foreground">Message</label>

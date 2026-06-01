@@ -58,8 +58,11 @@ add_action("rest_api_init", function () {
       $phone = sanitize_text_field((string) $request->get_param("phone"));
       $subject = sanitize_text_field((string) $request->get_param("subject"));
       $message = sanitize_textarea_field((string) $request->get_param("message"));
+      if ($subject === "") {
+        $subject = "Nouveau lead";
+      }
 
-      if ($name === "" || !is_email($email) || $phone === "" || $subject === "" || $message === "") {
+      if ($name === "" || !is_email($email) || $phone === "" || $message === "") {
         return new WP_REST_Response(array("ok" => false, "error" => "Invalid payload"), 400);
       }
 
