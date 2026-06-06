@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { HomePage } from "@/components/afrikaluxe/HomePage";
+import { APP_INSTALL_REDIRECT_SCRIPT } from "@/lib/app-install-redirect";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/app-install")({
   head: () => ({
     meta: [
       { title: "AfrikaLuxe — Marketplace N°1 en Afrique" },
@@ -16,10 +17,16 @@ export const Route = createFileRoute("/")({
         content: "Le luxe accessible, livré chez vous en 60 minutes dans 10 pays d'Afrique.",
       },
     ],
+    scripts: [
+      {
+        type: "text/javascript",
+        children: APP_INSTALL_REDIRECT_SCRIPT,
+      },
+    ],
   }),
-  component: Index,
+  component: AppInstall,
 });
 
-function Index() {
+function AppInstall() {
   return <HomePage />;
 }

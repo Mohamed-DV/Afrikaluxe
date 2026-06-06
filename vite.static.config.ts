@@ -10,7 +10,10 @@ export default defineConfig({
     outDir: "dist-static",
     emptyOutDir: true,
     rollupOptions: {
-      input: "index.html",
+      input: {
+        main: "index.html",
+        "app-install": "app-install.html",
+      },
     },
   },
 });

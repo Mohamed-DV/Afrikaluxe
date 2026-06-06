@@ -3,6 +3,11 @@
   publish = "dist-static"
 
 [[redirects]]
+  from = "/app-install"
+  to = "/app-install.html"
+  status = 200
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200

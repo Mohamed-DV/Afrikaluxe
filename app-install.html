@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AfrikaLuxe</title>
+    <link rel="icon" type="image/svg+xml" href="/src/assets/brand-a.svg" />
+    <script>
+      if (/android/i.test(navigator.userAgent)) {
+        location.replace(
+          "https://play.google.com/store/apps/details?id=com.afrikaluxe.app&hl=en",
+        );
+      } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        location.replace("https://apps.apple.com/ci/app/afrikaluxe/id6759881499");
+      } else {
+        location.replace("https://afrikaluxe.com");
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/static-main.tsx"></script>
+  </body>
+</html>
