@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "motion/react";
 import { Apple, Play, Star } from "lucide-react";
 import appMockup from "@/assets/app-mockup.jpg";
+import { APP_STORE_URL, PLAY_STORE_URL } from "@/lib/app-install-redirect";
 
 export function AppSection() {
   const { scrollYProgress } = useScroll();
@@ -68,7 +69,7 @@ export function AppSection() {
 
             <div className="mt-10 flex flex-wrap gap-4">
               <a
-                href="https://apps.apple.com/ci/app/afrikaluxe/id6759881499"
+                href={APP_STORE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center gap-3 rounded-2xl bg-foreground px-6 py-4 text-background transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_oklch(0.78_0.16_82_/_0.45)]"
@@ -80,7 +81,7 @@ export function AppSection() {
                 </div>
               </a>
               <a
-                href="https://play.google.com/store/apps/details?id=com.afrikaluxe.app&hl=en"
+                href={PLAY_STORE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center gap-3 rounded-2xl bg-gradient-gold px-6 py-4 text-primary-foreground shadow-gold transition-all duration-300 hover:scale-105 hover:shadow-[0_0_50px_oklch(0.78_0.16_82_/_0.7)]"

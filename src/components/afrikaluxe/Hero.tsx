@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { ArrowRight, Apple, Play } from "lucide-react";
 import heroProducts from "@/assets/hero-products.jpg";
 import africaMap from "@/assets/africa-map.png";
+import { APP_STORE_URL, PLAY_STORE_URL } from "@/lib/app-install-redirect";
 
 const countries = [
   { code: "cd", name: "RDC" },
@@ -118,7 +119,7 @@ export function Hero() {
             className="mt-8 flex flex-wrap items-center gap-3"
           >
             <a
-              href="https://apps.apple.com/ci/app/afrikaluxe/id6759881499"
+              href={APP_STORE_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 rounded-xl glass-dark px-4 py-2.5 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_oklch(0.78_0.16_82_/_0.4)]"
@@ -130,7 +131,7 @@ export function Hero() {
               </div>
             </a>
             <a
-              href="https://play.google.com/store/apps/details?id=com.afrikaluxe.app&hl=en"
+              href={PLAY_STORE_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 rounded-xl glass-dark px-4 py-2.5 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_oklch(0.78_0.16_82_/_0.4)]"
